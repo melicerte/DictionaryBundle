@@ -1,7 +1,7 @@
 formatter.name: pretty
 
 extensions:
-    PhpSpecCodeCoverage\CodeCoverageExtension: ~
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension: ~
 
 code_coverage:
     format:
