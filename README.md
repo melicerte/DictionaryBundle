@@ -31,6 +31,7 @@ That's why to install this fork you need to add the following lines to your `com
 
 ## Requirements
 - Symfony >= 2.8
+- PHP >= 5.6
 
 ## Installation
 Add the DictionaryBundle to your `composer.json`:
@@ -82,20 +83,14 @@ use Knp\DictionaryBundle\Form\Type\DictionaryType;
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
-        // PHP ~5.5.9 syntax
-        ->add('civility', DictionaryType::class, array(
+        ->add('civility', DictionaryType::class, [
             'name' => 'my_dictionary'
-        ))
+        ])
 
-        // PHP ~5.3.9+ syntax
-        ->add('civility', 'Knp\DictionaryBundle\Form\Type\DictionaryType', array(
+        // Symfony 2.x syntax
+        ->add('civility', 'dictionary', [
             'name' => 'my_dictionary'
-        ))
-
-        // PHP ~5.3.9+ (deprecated since Symfony 3.0)
-        ->add('civility', 'dictionary', array(
-            'name' => 'my_dictionary'
-        ))
+        ])
     ;
 }
 ```
@@ -136,7 +131,7 @@ knp_dictionary:
 - `key_value`: Define your own keys
 - `callable`: Build a dictionary from a callable
 
-### Callable dictionary
+### Callable dictionary
 You can create a callable dictionary:
 ```yaml
 knp_dictionary:
@@ -154,8 +149,8 @@ For now, this bundle is only able to resolve your **class constants**:
 
 ```yaml
 my_dictionary:
-	- MyClass::MY_CONSTANT
-	- Foo
+    - MyClass::MY_CONSTANT
+    - Foo
     - Bar
 ```
 You want to add other kinds of transformations for your dictionary values ?
@@ -167,7 +162,7 @@ Create your class that implements [TransformerInterface](src/Knp/DictionaryBundl
 Load your transformer and tag it as `knp_dictionary.value_transformer`.
 ```yaml
 services:
-	my_bundle.my_namespace.my_transformer:
+    my_bundle.my_namespace.my_transformer:
     	class: %my_transformer_class%
     	tags:
         	- { name: knp_dictionary.value_transformer }
@@ -209,16 +204,22 @@ App\Entity\User:
         city: <dictionary('cities')>
 ```
 
-## Create your own dictionary implementation
+## Create your own dictionary implementation
 
 ### Dictionary
 Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary/Dictionary.php).
 
-### Dictionary Factory
+### Dictionary Factory
 You must create a dictionary factory that will be responsible to instanciate your dictionary.
 
 ```yaml
 services:
+    # Syntax Symfony >= 3.3
+    App\Dictionary\Factory\MyCustomFactory:
+        tags:
+            { name: 'knp_dictionary.factory' }
+            
+    # Syntax Symfony < 3.3
     app.dictionary.factory.my_custom_factory:
         class: App\Dictionary\Factory\MyCustomFactory
         tags:
