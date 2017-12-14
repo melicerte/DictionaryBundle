@@ -52,7 +52,7 @@ $bundles = array(
 
 ## Maintainers
 
-You can ping us if need some reviews/comments/help:
+You can ping us if you need some reviews/comments/help:
 
  - [@Nek-](https://github.com/Nek-)
  - [@babeou](https://github.com/babeou)
@@ -68,7 +68,7 @@ knp_dictionary:
             - Baz
 
 ```
-You will be able to retreive it trough the dictionary registry service:
+You will be able to retrieve it through the dictionary registry service:
 ```php
 $container->get('knp_dictionary.registry')->get('my_dictionary');
 ```
