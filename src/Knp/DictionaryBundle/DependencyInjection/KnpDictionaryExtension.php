@@ -2,6 +2,8 @@
 
 namespace Knp\DictionaryBundle\DependencyInjection;
 
+use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass;
+use Knp\DictionaryBundle\Dictionary;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -23,5 +25,13 @@ class KnpDictionaryExtension extends Extension
             new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('dictionary.xml');
+
+        // BC Layer for Symfony < 3.3
+        if (method_exists($container, 'registerForAutoconfiguration')) {
+            $container
+                ->registerForAutoconfiguration(Dictionary::class)
+                ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY)
+            ;
+        }
     }
 }

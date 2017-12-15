@@ -213,6 +213,9 @@ App\Entity\User:
 
 ### Dictionary
 Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary/Dictionary.php).
+In Symfony >= 3.3, your class will be automatically register as dictionary service.
+
+For older Symfony versions (2.8 - 3.2) you need to add the tag `knp_dictionary.dictionary`.
 
 ### Dictionary Factory
 You must create a dictionary factory that will be responsible to instanciate your dictionary.
