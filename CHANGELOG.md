@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Fix template management for Symfony flex
+
 ## [2.0.0] - 2017-12-12
 ### Added
 - Add tag `knp_dictionary.factory` for DI services so you can add dictionary factories
