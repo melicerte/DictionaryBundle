@@ -4,7 +4,7 @@ namespace Knp\DictionaryBundle\Command;
 
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Dump dictionaries with their related values
  */
-class DictionaryDumpCommand extends ContainerAwareCommand
+class DictionaryDumpCommand extends Command
 {
     protected static $defaultName = 'knp:dictionary:dump';
 
@@ -31,14 +31,14 @@ class DictionaryDumpCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setDescription('Dump KNP Dictionnaries')
+            ->setDescription('Dump Dictionaries')
             ->setHelp('This command allows you to dump KNP dictionnaries and their values')
             ->addArgument(
                 'dictionary',
                 InputArgument::OPTIONAL,
                 'Dictionary name you want to display'
             )
-            ->setHelp(<<<'EOF'
+            ->setHelp(<<<EOF
 The <info>%command.name%</info> list all dictionaries with their related values.
 You can choose to list a specific dictionary:
 
@@ -56,7 +56,7 @@ EOF
 
         // Add output context text
         $io->title('KNP Dictionary');
-        $io->text('Here is the KNP Directory with their related values');
+        $io->text('Here are the dictionaries with their related key-values:');
         if (!\is_null($dictionaryName)) {
             $io->text("Search for dictionary named <fg=green>$dictionaryName</fg=green>");
         }
@@ -66,9 +66,9 @@ EOF
         $tableRows = $this->getDictionariesDetail($dictionaryName);
 
         // Output data
-        if (sizeof($tableRows) > 0) {
+        if (\sizeof($tableRows) > 0) {
             $io->table([], $tableRows);
-        } elseif (!\is_null($dictionaryName) && 0 === sizeof($tableRows)) {
+        } elseif (!\is_null($dictionaryName) && 0 === \sizeof($tableRows)) {
             $errorIo->error("No dictionary named $dictionaryName");
         }
     }
@@ -87,8 +87,8 @@ EOF
         foreach ($this->registry->all() as $dico) {
             if (!\is_null($dictionaryName) && $dictionaryName === $dico->getName() || \is_null($dictionaryName)) {
                 $tableRows[] = ["<fg=cyan>{$dico->getName()}</fg=cyan>"];
-                foreach ($dico->getValues() as $value) {
-                    $tableRows[] = ["   $value"];
+                foreach ($dico as $key => $value) {
+                    $tableRows[] = ["   $key\t| $value"];
                 }
             }
         }
