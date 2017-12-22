@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `knp:dictionary:dump` command for dictionary listing and preview
 - Add auto-registration of `Dictionary` implementations as actual dictionary for users of Sf >= 3.3
 
-## Fixed
+### Fixed
 - Documentation formattage is now great again
 
 ## [2.0.1] - 2017-12-15
