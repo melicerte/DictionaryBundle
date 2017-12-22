@@ -204,6 +204,20 @@ App\Entity\User:
         city: <dictionary('cities')>
 ```
 
+## Use dictionary command
+
+You can use the following command to show your app dictionaries easily:
+```bash
+php app/console knp:dictionary:dump # SF2
+php bin/console knp:dictionary:dump # SF3 / SF4 
+```
+
+If you want to display only one dictionary, you can set it name in argument
+```bash
+php app/console knp:dictionary:dump my_dictionary # SF2
+php bin/console knp:dictionary:dump my_dictionary # SF3 / SF4 
+```
+
 ## Create your own dictionary implementation
 
 ### Dictionary
