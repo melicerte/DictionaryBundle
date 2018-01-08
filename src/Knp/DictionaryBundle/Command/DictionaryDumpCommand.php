@@ -63,11 +63,19 @@ EOF
         $io->newLine();
 
         // Read dictionaries information
-        $tableRows = $this->getDictionariesDetail($dictionaryName);
+        if (\is_null($dictionaryName)) {
+            $dictionaries = $this->registry->all();
+        } else {
+            $dictionaries = [$this->registry->get($dictionaryName)];
+        }
+
+        $tableRows = $this->getDictionariesDetail($dictionaries);
 
         // Output data
         if (\sizeof($tableRows) > 0) {
-            $io->table([], $tableRows);
+            foreach ($tableRows as $header => $raws) {
+                $io->table([$header], $raws);
+            }
         } elseif (!\is_null($dictionaryName) && 0 === \sizeof($tableRows)) {
             $errorIo->error("No dictionary named $dictionaryName");
         }
@@ -75,21 +83,16 @@ EOF
 
     /**
      * Get all dictionaries with they values
-     * If $dictionaryName is set, only display dictionary matching dictionary
      *
-     * @param null|string $dictionaryName the dictionary name asked for filtering
+     * @param array $dictionaries
      * @return array rows to display
      */
-    private function getDictionariesDetail($dictionaryName = null)
+    private function getDictionariesDetail(array $dictionaries = [])
     {
         $tableRows = [];
-        /** @var Dictionary $dico */
-        foreach ($this->registry->all() as $dico) {
-            if (!\is_null($dictionaryName) && $dictionaryName === $dico->getName() || \is_null($dictionaryName)) {
-                $tableRows[] = ["<fg=cyan>{$dico->getName()}</fg=cyan>"];
-                foreach ($dico as $key => $value) {
-                    $tableRows[] = ["   $key\t| $value"];
-                }
+        foreach ($dictionaries as $dico) {
+            foreach ($dico as $key => $value) {
+                $tableRows["<fg=cyan>{$dico->getName()}</fg=cyan>"][] = [$key, $value];
             }
         }
 
