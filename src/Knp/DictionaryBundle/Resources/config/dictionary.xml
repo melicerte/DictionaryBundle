@@ -56,7 +56,7 @@
       <argument type="service" id="knp_dictionary.registry"/>
     </service>
 
-    <service id="knp_dictionary.registry" alias="knp_dictionary.dictionary.dictionary_registry"/>
+    <service id="knp_dictionary.registry" alias="knp_dictionary.dictionary.dictionary_registry" public="true"/>
 
     <service id="knp_dictionary.command.dictionary_dump" class="Knp\DictionaryBundle\Command\DictionaryDumpCommand">
       <argument type="service" id="knp_dictionary.registry"/>
