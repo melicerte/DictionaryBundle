@@ -1,8 +1,6 @@
 language: php
 
 php:
-    - 5.6
-    - 7.0
     - 7.1
     - 7.2
 
@@ -12,11 +10,9 @@ cache:
 
 matrix:
     include:
-        - php: 5.6
-          env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
-        - php: 7.0
-          env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
         - php: 7.1
+          env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
+        - php: 7.2
           env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
 
 branches:
@@ -24,6 +20,7 @@ branches:
         - master
         - 1.x
         - 2.x
+        - 3.x
 
 before_script:
     - composer update --prefer-source $COMPOSER_FLAGS
