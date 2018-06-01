@@ -38,8 +38,10 @@
         "bossa/phpspec2-expect": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.11",
         "leanphp/phpspec-code-coverage": "^4.0",
+        "phpunit/php-code-coverage": "^5.2.3",
         "phpspec/phpspec": "^4.0",
-        "phpspec/prophecy": "^1.7"
+        "phpspec/prophecy": "^1.7",
+        "sebastian/comparator": "^2.0"
     },
     "config": {
         "bin-dir": "bin"
