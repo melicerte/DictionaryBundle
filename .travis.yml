@@ -3,7 +3,6 @@ language: php
 php:
     - 7.1
     - 7.2
-    - nightly
 
 cache:
     directories:
@@ -15,13 +14,16 @@ matrix:
           env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
         - php: 7.2
           env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
+        - php: nightly
+          env: 'COMPOSER_FLAGS="--ignore-platform-reqs"'
+    allow_failures:
+        - php: nightly
 
 branches:
     only:
         - master
         - 1.x
         - 2.x
-        - 3.x
 
 before_script:
     - composer update --prefer-source $COMPOSER_FLAGS
