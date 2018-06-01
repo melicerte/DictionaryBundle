@@ -1,5 +1,5 @@
 {
-    "name":         "knplabs/dictionary-bundle",
+    "name":         "biig/dictionary-bundle",
     "description":  "Are you often tired to repeat static choices like gender or civility in your apps ?",
     "keywords":     ["dictionary"],
     "type":         "symfony-bundle",
