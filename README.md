@@ -5,43 +5,26 @@ DictionaryBundle
 
 Are you often tired to repeat static choices like gender or civility in your apps ?
 
-
-## This is a fork
-
-This bundle is a fork. The motivation for forking it is the following:
-- Getting a stable release (2.0)
-- Adding Symfony 4 compatibility
-- Ensure a future maintenance of the project
-
-As today we still hope that the main project will reborn. There is also a lot of work to achieve
-to release all unreleased features.
-
-That's why to install this fork you need to add the following lines to your `composer.json` file.
-
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/biig-io/DictionaryBundle"
-        }
-    ]
-}
-```
+__Notice: This bundle is a fork from KnpLabs/DictionaryBundle.__
 
 ## Requirements
-- Symfony >= 2.8
-- PHP >= 5.6
+- Symfony >= 3.4
+- PHP >= 7.1
 
 ## Installation
 Add the DictionaryBundle to your `composer.json`:
 ```yaml
 {
     "require": {
-        "knplabs/dictionary-bundle": "~2.0"
+        "biig/dictionary-bundle": "^3.0"
     }
 }
 ```
+Or install it directly with composer command
+```bash
+composer require biig/dictionary-bundle
+```
+
 Register the bundle in ``app/AppKernel.php``
 
 ```php
