@@ -6,8 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
-- Upgrade `php-cs-fixer` package from `^1.11` to `^2.2` && update `.php_cs` rules
-- PHP 5.6 is now the minimum version requirement
+- Upgrade `php-cs-fixer` package from `^1.11` to `^2.11` && update `.php_cs` rules
+- PHP 7.1 is now the minimum version requirement
 - Add composer package in Dockerfile
 
 ## [2.1.2] - 2018-02-16

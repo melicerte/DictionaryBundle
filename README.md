@@ -56,10 +56,11 @@ $bundles = array(
 You can ping us if you need some reviews/comments/help:
 
  - [@Nek-](https://github.com/Nek-)
+ - [@Awkan](https://github.com/Awkan)
  - [@babeou](https://github.com/babeou)
 
 ## Basic usage
-Define dictionaries in your config.yml file:
+Define dictionaries in your config.yaml file:
 ```yaml
 knp_dictionary:
     dictionaries:
@@ -84,11 +85,6 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
         ->add('civility', DictionaryType::class, [
-            'name' => 'my_dictionary'
-        ])
-
-        // Symfony 2.x syntax
-        ->add('civility', 'dictionary', [
             'name' => 'my_dictionary'
         ])
     ;
@@ -208,14 +204,12 @@ App\Entity\User:
 
 You can use the following command to show your app dictionaries easily:
 ```bash
-php app/console knp:dictionary:dump # SF2
-php bin/console knp:dictionary:dump # SF3 / SF4 
+php bin/console knp:dictionary:dump
 ```
 
 If you want to display only one dictionary, you can set it name in argument
 ```bash
-php app/console knp:dictionary:dump my_dictionary # SF2
-php bin/console knp:dictionary:dump my_dictionary # SF3 / SF4 
+php bin/console knp:dictionary:dump my_dictionary
 ```
 
 ## Create your own dictionary implementation
@@ -224,8 +218,6 @@ php bin/console knp:dictionary:dump my_dictionary # SF3 / SF4
 Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary/Dictionary.php).
 In Symfony >= 3.3, your class will be automatically register as dictionary service.
 
-For older Symfony versions (2.8 - 3.2) you need to add the tag `knp_dictionary.dictionary`.
-
 ### Dictionary Factory
 You must create a dictionary factory that will be responsible to instanciate your dictionary.
 
@@ -233,12 +225,6 @@ You must create a dictionary factory that will be responsible to instanciate you
 services:
     # Syntax Symfony >= 3.3
     App\Dictionary\Factory\MyCustomFactory:
-        tags:
-            { name: 'knp_dictionary.factory' }
-            
-    # Syntax Symfony < 3.3
-    app.dictionary.factory.my_custom_factory:
-        class: App\Dictionary\Factory\MyCustomFactory
         tags:
             { name: 'knp_dictionary.factory' }
 ```
