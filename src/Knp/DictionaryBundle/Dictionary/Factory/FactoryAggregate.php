@@ -34,7 +34,7 @@ class FactoryAggregate implements Factory
             }
         }
 
-        throw new \InvalidArgumentException(sprintf(
+        throw new \InvalidArgumentException(\sprintf(
             'The dictionary with named "%s" cannot be created.',
             $name
         ));

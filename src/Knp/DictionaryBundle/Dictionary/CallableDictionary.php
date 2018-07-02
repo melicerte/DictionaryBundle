@@ -31,8 +31,8 @@ class CallableDictionary implements Dictionary
      */
     public function __construct($name, callable $callable, array $callableArgs = [])
     {
-        $this->name         = $name;
-        $this->callable     = $callable;
+        $this->name = $name;
+        $this->callable = $callable;
         $this->callableArgs = $callableArgs;
     }
 
@@ -61,7 +61,7 @@ class CallableDictionary implements Dictionary
     {
         $this->hydrate();
 
-        return array_keys($this->values);
+        return \array_keys($this->values);
     }
 
     /**
@@ -71,7 +71,7 @@ class CallableDictionary implements Dictionary
     {
         $this->hydrate();
 
-        return array_key_exists($offset, $this->values);
+        return \array_key_exists($offset, $this->values);
     }
 
     /**
@@ -125,9 +125,9 @@ class CallableDictionary implements Dictionary
             return;
         }
 
-        $values = call_user_func_array($this->callable, $this->callableArgs);
+        $values = \call_user_func_array($this->callable, $this->callableArgs);
 
-        if (false === is_array($values) && false === $values instanceof \ArrayAccess) {
+        if (false === \is_array($values) && false === $values instanceof \ArrayAccess) {
             throw new \InvalidArgumentException(
                 'Dictionary callable must return an array or an instance of ArrayAccess'
             );

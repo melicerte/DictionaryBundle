@@ -8,7 +8,7 @@ use PhpSpec\ObjectBehavior;
 
 class TraceableDictionarySpec extends ObjectBehavior
 {
-    function let(DictionaryDataCollector $collector)
+    public function let(DictionaryDataCollector $collector)
     {
         $dictionary = new SimpleDictionary('name', [
             'foo' => 'bar',
@@ -18,67 +18,67 @@ class TraceableDictionarySpec extends ObjectBehavior
         $this->beConstructedWith($dictionary, $collector);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\TraceableDictionary');
     }
 
-    function it_is_a_dictionary()
+    public function it_is_a_dictionary()
     {
         $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
     }
 
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $this->getName()->shouldReturn('name');
     }
 
-    function it_traces_keys($collector)
+    public function it_traces_keys($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
         $this->getKeys()->shouldReturn(['foo', 'baz']);
     }
 
-    function it_traces_values($collector)
+    public function it_traces_values($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
         $this->getValues()->shouldReturn(['foo' => 'bar', 'baz' => null]);
     }
 
-    function it_traces_values_get($collector)
+    public function it_traces_values_get($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
         $this['foo']->shouldReturn('bar');
     }
 
-    function it_traces_value_set($collector)
+    public function it_traces_value_set($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz', 'yo'], ['bar', null, 'lo'])->shouldbeCalled();
 
         $this['yo'] = 'lo';
     }
 
-    function it_traces_value_unset($collector)
+    public function it_traces_value_unset($collector)
     {
         $collector->addDictionary('name', ['baz'], [null])->shouldbeCalled();
 
         unset($this['foo']);
     }
 
-    function it_traces_key_exists($collector)
+    public function it_traces_key_exists($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
         expect(isset($this['baz']))->toBe(true);
     }
 
-    function it_trace_iteration($collector)
+    public function it_trace_iteration($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
-        expect(iterator_to_array($this->getIterator()->getWrappedObject()))->toBe(['foo' => 'bar', 'baz' => null]);
+        expect(\iterator_to_array($this->getIterator()->getWrappedObject()))->toBe(['foo' => 'bar', 'baz' => null]);
     }
 }

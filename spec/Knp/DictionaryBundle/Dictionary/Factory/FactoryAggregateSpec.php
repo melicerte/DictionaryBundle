@@ -8,17 +8,17 @@ use PhpSpec\ObjectBehavior;
 
 class FactoryAggregateSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate');
     }
 
-    function it_is_a_factory()
+    public function it_is_a_factory()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory');
     }
 
-    function it_supports_if_one_factory_supports(
+    public function it_supports_if_one_factory_supports(
         Factory $factory1,
         Factory $factory2,
         Factory $factory3
@@ -36,7 +36,7 @@ class FactoryAggregateSpec extends ObjectBehavior
         $this->supports([])->shouldReturn(true);
     }
 
-    function it_uses_its_factory_to_build_a_dictionary(
+    public function it_uses_its_factory_to_build_a_dictionary(
         Factory $factory1,
         Factory $factory2,
         Factory $factory3,
@@ -53,7 +53,7 @@ class FactoryAggregateSpec extends ObjectBehavior
         $this->create('yolo', [])->shouldReturn($dictionary);
     }
 
-    function it_throws_exception_if_no_factory_supports_the_config(
+    public function it_throws_exception_if_no_factory_supports_the_config(
         Factory $factory1,
         Factory $factory2,
         Factory $factory3

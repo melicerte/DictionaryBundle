@@ -8,12 +8,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class KnpDictionaryBundleSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\KnpDictionaryBundle');
     }
 
-    function it_registers_compiler_passes(ContainerBuilder $container)
+    public function it_registers_compiler_passes(ContainerBuilder $container)
     {
         $container
             ->addCompilerPass(Argument::type('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryFactoryBuildingPass'))

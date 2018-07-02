@@ -7,27 +7,27 @@ use PhpSpec\ObjectBehavior;
 
 class KeyValueSpec extends ObjectBehavior
 {
-    function let(ValueTransformer $transformer)
+    public function let(ValueTransformer $transformer)
     {
         $this->beConstructedWith($transformer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\KeyValue');
     }
 
-    function it_is_a_factory()
+    public function it_is_a_factory()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory');
     }
 
-    function it_supports_specific_config()
+    public function it_supports_specific_config()
     {
         $this->supports(['type' => 'key_value'])->shouldReturn(true);
     }
 
-    function it_throws_exception_if_no_content_is_provided()
+    public function it_throws_exception_if_no_content_is_provided()
     {
         $this
             ->shouldThrow('\InvalidArgumentException')
@@ -35,7 +35,7 @@ class KeyValueSpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_a_dictionary($transformer)
+    public function it_creates_a_dictionary($transformer)
     {
         $config = [
             'content' => [

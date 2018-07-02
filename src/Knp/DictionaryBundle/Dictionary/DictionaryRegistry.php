@@ -33,7 +33,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     public function set($key, Dictionary $dictionary)
     {
         if (isset($this->dictionaries[$key])) {
-            throw new \RuntimeException(sprintf(
+            throw new \RuntimeException(\sprintf(
                 'The key "%s" already exists in the dictionary registry',
                 $key
             ));
@@ -76,11 +76,11 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     public function offsetGet($offset)
     {
         if (false === $this->offsetExists($offset)) {
-            throw new DictionaryNotFoundException(sprintf(
+            throw new DictionaryNotFoundException(\sprintf(
                 'The dictionary "%s" has not been found in the registry. ' .
                 'Known dictionaries are: "%s".',
                 $offset,
-                implode('", "', array_keys($this->dictionaries))
+                \implode('", "', \array_keys($this->dictionaries))
             ));
         }
 
@@ -114,7 +114,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
      */
     public function count()
     {
-        return count($this->dictionaries);
+        return \count($this->dictionaries);
     }
 
     /**

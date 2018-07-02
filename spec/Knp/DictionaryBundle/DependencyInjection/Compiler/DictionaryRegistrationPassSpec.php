@@ -10,12 +10,12 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class DictionaryRegistrationPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass');
     }
 
-    function it_registers_dictionaries(ContainerBuilder $container, Definition $registry)
+    public function it_registers_dictionaries(ContainerBuilder $container, Definition $registry)
     {
         $tags = ['foo' => [], 'bar' => [], 'baz' => []];
 
@@ -23,15 +23,15 @@ class DictionaryRegistrationPassSpec extends ObjectBehavior
         $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY)->willReturn($tags);
 
         $registry->addMethodCall('add', Argument::that(function (array $arguments) {
-            return $arguments[0]->__toString() === 'foo';
+            return 'foo' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 
         $registry->addMethodCall('add', Argument::that(function (array $arguments) {
-            return $arguments[0]->__toString() === 'bar';
+            return 'bar' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 
         $registry->addMethodCall('add', Argument::that(function (array $arguments) {
-            return $arguments[0]->__toString() === 'baz';
+            return 'baz' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 
         $this->process($container);

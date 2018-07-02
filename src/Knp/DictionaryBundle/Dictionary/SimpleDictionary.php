@@ -22,7 +22,7 @@ class SimpleDictionary implements DictionaryInterface
      */
     public function __construct($name, $values)
     {
-        $this->name   = $name;
+        $this->name = $name;
         $this->values = $values;
     }
 
@@ -47,7 +47,7 @@ class SimpleDictionary implements DictionaryInterface
      */
     public function getKeys()
     {
-        return array_keys($this->values);
+        return \array_keys($this->values);
     }
 
     /**
@@ -55,7 +55,7 @@ class SimpleDictionary implements DictionaryInterface
      */
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->values);
+        return \array_key_exists($offset, $this->values);
     }
 
     /**

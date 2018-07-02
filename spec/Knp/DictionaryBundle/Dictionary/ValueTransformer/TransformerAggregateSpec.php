@@ -7,17 +7,17 @@ use PhpSpec\ObjectBehavior;
 
 class TransformerAggregateSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate');
     }
 
-    function it_is_a_value_transfomer()
+    public function it_is_a_value_transfomer()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\ValueTransformer');
     }
 
-    function it_supports_values(
+    public function it_supports_values(
         ValueTransformer $transformer1,
         ValueTransformer $transformer2,
         ValueTransformer $transformer3
@@ -38,7 +38,7 @@ class TransformerAggregateSpec extends ObjectBehavior
         $this->supports([])->shouldReturn(true);
     }
 
-    function it_transform_value(
+    public function it_transform_value(
         ValueTransformer $transformer1,
         ValueTransformer $transformer2,
         ValueTransformer $transformer3

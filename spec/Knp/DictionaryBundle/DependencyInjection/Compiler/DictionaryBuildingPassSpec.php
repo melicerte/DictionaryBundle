@@ -10,17 +10,17 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class DictionaryBuildingPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass');
     }
 
-    function it_builds_a_value_as_key_dictionary_form_the_config(ContainerBuilder $container)
+    public function it_builds_a_value_as_key_dictionary_form_the_config(ContainerBuilder $container)
     {
         $config = [
             'dictionaries' => [
                 'dico1' => [
-                    'type'    => Dictionary::VALUE_AS_KEY,
+                    'type' => Dictionary::VALUE_AS_KEY,
                     'content' => ['foo', 'bar', 'baz'],
                 ],
             ],
@@ -46,7 +46,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
                 expect($definition->getArguments())
                     ->toBe(['dico1', [
-                        'type'    => Dictionary::VALUE_AS_KEY,
+                        'type' => Dictionary::VALUE_AS_KEY,
                         'content' => ['foo', 'bar', 'baz'],
                     ]])
                 ;
@@ -62,12 +62,12 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_value_dictionary_form_the_config(ContainerBuilder $container)
+    public function it_builds_a_value_dictionary_form_the_config(ContainerBuilder $container)
     {
         $config = [
             'dictionaries' => [
                 'dico1' => [
-                    'type'    => Dictionary::VALUE,
+                    'type' => Dictionary::VALUE,
                     'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
                 ],
             ],
@@ -93,7 +93,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
                 expect($definition->getArguments())
                     ->toBe(['dico1', [
-                        'type'    => Dictionary::VALUE,
+                        'type' => Dictionary::VALUE,
                         'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
                     ]])
                 ;
@@ -109,12 +109,12 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_key_value_dictionary_form_the_config(ContainerBuilder $container)
+    public function it_builds_a_key_value_dictionary_form_the_config(ContainerBuilder $container)
     {
         $config = [
             'dictionaries' => [
                 'dico1' => [
-                    'type'    => Dictionary::KEY_VALUE,
+                    'type' => Dictionary::KEY_VALUE,
                     'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
                 ],
             ],
@@ -140,7 +140,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
                 expect($definition->getArguments())
                     ->toBe(['dico1', [
-                        'type'    => Dictionary::KEY_VALUE,
+                        'type' => Dictionary::KEY_VALUE,
                         'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
                     ]])
                 ;
