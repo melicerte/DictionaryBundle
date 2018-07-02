@@ -3,6 +3,7 @@
 namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
+use Knp\DictionaryBundle\Exception\UnauthorizedActionOnDictionaryException;
 
 class SimpleDictionary implements DictionaryInterface
 {
@@ -73,7 +74,7 @@ class SimpleDictionary implements DictionaryInterface
      */
     public function offsetSet($offset, $value)
     {
-        $this->values[$offset] = $value;
+        throw new UnauthorizedActionOnDictionaryException('You can\'t modify or add a value inside a dictionary.');
     }
 
     /**
@@ -81,7 +82,7 @@ class SimpleDictionary implements DictionaryInterface
      */
     public function offsetUnset($offset)
     {
-        unset($this->values[$offset]);
+        throw new UnauthorizedActionOnDictionaryException('You can\'t remove something from a dictionary.');
     }
 
     /**
