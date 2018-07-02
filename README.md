@@ -5,7 +5,7 @@ DictionaryBundle
 
 Are you often tired to repeat static choices like gender or civility in your apps ?
 
-__Notice: This bundle is a fork from KnpLabs/DictionaryBundle.__
+__Notice: This bundle is a fork from KnpLabs/DictionaryBundle. We are working on releasing a 3.0 version but for now the released version is [2.x](https://github.com/biig-io/DictionaryBundle/tree/2.x). You should refere to the right branch to have a good documentation.__
 
 ## Requirements
 - Symfony >= 3.4
