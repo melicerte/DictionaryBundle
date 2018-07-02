@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add composer package in Dockerfile
 - Add support for arguments for the callable dictionary
 
+### Fixed
+- Dictionary validator now accept arrays if you specify "multiple" option at `true`
+
 ## [2.1.2] - 2018-02-16
 ### Fixed
 - `knp_dictionary.registry` service declaration set public to true (Symfony 4 fix)

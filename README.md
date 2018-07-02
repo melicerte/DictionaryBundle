@@ -86,7 +86,7 @@ class User
 {
     /**
      * @ORM\Column
-     * @Dictionary(name="my_dictionary")
+     * @Dictionary(name="my_dictionary", multiple=false)
      */
     private $civility;
 }

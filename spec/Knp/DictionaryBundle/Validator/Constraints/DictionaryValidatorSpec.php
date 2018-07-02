@@ -20,7 +20,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
         $registry->get('dico')->willReturn($dictionary);
 
-        $dictionary->getKeys()->willReturn(['the_key']);
+        $dictionary->getKeys()->willReturn(['the_key', 'the_other_key']);
     }
 
     public function it_is_initializable()
@@ -41,7 +41,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
     {
         $constraint = new Constraint(['name' => 'dico']);
 
-        $context->addViolation('The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', ['{{ key }}' => 'the_unexisting_key', '{{ keys }}' => 'the_key'])->shouldBeCalled();
+        $context->addViolation('The key(s) {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', ['{{ key }}' => 'the_unexisting_key', '{{ keys }}' => 'the_key, the_other_key'])->shouldBeCalled();
 
         $this->validate('the_unexisting_key', $constraint);
     }
@@ -50,5 +50,42 @@ class DictionaryValidatorSpec extends ObjectBehavior
     {
         $constraint = new NotNull();
         $this->shouldThrow(new UnexpectedTypeException($constraint, 'Knp\DictionaryBundle\Validator\Constraints\Dictionary'))->duringValidate('the_key', $constraint);
+    }
+
+    public function it_does_nothing_when_empty_value($context)
+    {
+        $constraint = new Constraint(['name' => 'dico']);
+
+        $context->addViolation(Argument::any())->shouldNotBeCalled();
+
+        $this->validate('', $constraint);
+        $this->validate([], $constraint);
+    }
+
+    public function it_should_add_violation_on_array_with_error($context)
+    {
+        $constraint = new Constraint(['name' => 'dico', 'multiple' => true]);
+
+        $context->addViolation('The key(s) {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', ['{{ key }}' => 'the_unexisting_key, other_wrong_key', '{{ keys }}' => 'the_key, the_other_key'])->shouldBeCalled();
+
+        $this->validate(['the_key', 'the_unexisting_key', 'other_wrong_key'], $constraint);
+    }
+
+    public function it_should_not_add_violation_on_correct_array($context)
+    {
+        $constraint = new Constraint(['name' => 'dico', 'multiple' => true]);
+
+        $context->addViolation(Argument::any(), Argument::any())->shouldNotBeCalled();
+
+        $this->validate(['the_key', 'the_other_key'], $constraint);
+    }
+
+    public function it_should_not_accept_array_if_multiple_not_defined($context)
+    {
+        $constraint = new Constraint(['name' => 'dico', 'multiple' => false]);
+
+        $context->addViolation('The key(s) {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', ['{{ key }}' => ['the_key', 'the_other_key'], '{{ keys }}' => 'the_key, the_other_key'])->shouldBeCalled();
+
+        $this->validate(['the_key', 'the_other_key'], $constraint);
     }
 }
