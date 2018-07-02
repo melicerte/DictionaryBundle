@@ -30,16 +30,16 @@ class DictionaryType extends AbstractType
         $registry = $this->registry;
 
         $choices = function (Options $options) use ($registry) {
-            $name    = $options['name'];
+            $name = $options['name'];
             $choices = $registry[$name]->getValues();
 
-            return array_flip($choices);
+            return \array_flip($choices);
         };
 
         $resolver
             ->setDefault('choices', $choices)
             ->setRequired(['name'])
-            ->setAllowedValues('name', array_keys($this->registry->all()))
+            ->setAllowedValues('name', \array_keys($this->registry->all()))
         ;
     }
 

@@ -8,17 +8,17 @@ use PhpSpec\ObjectBehavior;
 
 class DictionaryProviderSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $dictionaries)
+    public function let(DictionaryRegistry $dictionaries)
     {
         $this->beConstructedWith($dictionaries);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\DataFixtures\DictionaryProvider');
     }
 
-    function it_returns_a_key_from_a_dictionary($dictionaries, Dictionary $dictionary)
+    public function it_returns_a_key_from_a_dictionary($dictionaries, Dictionary $dictionary)
     {
         $dictionaries->get('omg')->willReturn($dictionary);
         $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);

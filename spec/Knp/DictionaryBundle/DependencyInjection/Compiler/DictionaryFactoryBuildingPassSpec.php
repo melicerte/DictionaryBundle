@@ -10,12 +10,12 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryFactoryBuildingPass');
     }
 
-    function it_adds_tagged_services_into_factory_aggregate(
+    public function it_adds_tagged_services_into_factory_aggregate(
         ContainerBuilder $container,
         Definition $factory1,
         Definition $factory2,

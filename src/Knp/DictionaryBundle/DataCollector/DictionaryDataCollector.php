@@ -17,7 +17,7 @@ class DictionaryDataCollector extends DataCollector
 
     public function addDictionary($name, array $keys, array $values)
     {
-        $this->data[$name] = array_map(function ($key, $value) {
+        $this->data[$name] = \array_map(function ($key, $value) {
             return ['key' => $key, 'value' => $value];
         }, $keys, $values);
     }

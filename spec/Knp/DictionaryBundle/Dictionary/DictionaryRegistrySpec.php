@@ -7,7 +7,7 @@ use PhpSpec\ObjectBehavior;
 
 class DictionaryRegistrySpec extends ObjectBehavior
 {
-    function let(Dictionary $dictionary, Dictionary $dictionary2)
+    public function let(Dictionary $dictionary, Dictionary $dictionary2)
     {
         $dictionary->getName()->willReturn('foo');
 
@@ -15,73 +15,73 @@ class DictionaryRegistrySpec extends ObjectBehavior
         $this->set('dictionary', $dictionary2);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\DictionaryRegistry');
     }
 
-    function it_is_an_array_access()
+    public function it_is_an_array_access()
     {
         $this->shouldHaveType('ArrayAccess');
     }
 
-    function it_is_iterable()
+    public function it_is_iterable()
     {
         $this->shouldHaveType('IteratorAggregate');
     }
 
-    function it_is_countable()
+    public function it_is_countable()
     {
         $this->shouldHaveType('Countable');
     }
 
-    function it_provides_a_list_of_dictionaries($dictionary, $dictionary2)
+    public function it_provides_a_list_of_dictionaries($dictionary, $dictionary2)
     {
         $this->all()->shouldReturn([
-            'foo'        => $dictionary,
+            'foo' => $dictionary,
             'dictionary' => $dictionary2,
         ]);
     }
 
-    function it_sets_registry_entry($dictionary)
+    public function it_sets_registry_entry($dictionary)
     {
         $this->set('bar', $dictionary)->shouldReturn($this);
     }
 
-    function it_should_throw_exception_if_entry_exists($dictionary)
+    public function it_should_throw_exception_if_entry_exists($dictionary)
     {
         $this->shouldThrow('\RuntimeException')->duringSet('foo', $dictionary);
     }
 
-    function it_should_entry_if_it_exists($dictionary)
+    public function it_should_entry_if_it_exists($dictionary)
     {
         $this->get('foo')->shouldReturn($dictionary);
     }
 
-    function it_should_throw_exception_if_entry_does_not_exist()
+    public function it_should_throw_exception_if_entry_does_not_exist()
     {
         $this->shouldThrow('Knp\DictionaryBundle\Exception\DictionaryNotFoundException')->duringGet('bar');
     }
 
-    function its_offsetSet_method_cannot_be_called()
+    public function its_offsetSet_method_cannot_be_called()
     {
         $this->shouldThrow('\RuntimeException')->duringOffsetSet('foo', 'bar');
     }
 
-    function its_offsetUnset_method_cannot_be_called()
+    public function its_offsetUnset_method_cannot_be_called()
     {
         $this->shouldThrow('\RuntimeException')->duringOffsetUnset('foo');
     }
 
-    function it_counts_entries()
+    public function it_counts_entries()
     {
         $this->count()->shouldReturn(2);
     }
 
-    function it_provides_an_array_iterator($dictionary, $dictionary2)
+    public function it_provides_an_array_iterator($dictionary, $dictionary2)
     {
         $this->getIterator()->getArrayCopy()->shouldReturn([
-            'foo'        => $dictionary,
+            'foo' => $dictionary,
             'dictionary' => $dictionary2,
         ]);
     }

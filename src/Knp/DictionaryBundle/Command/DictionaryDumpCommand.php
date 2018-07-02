@@ -2,23 +2,22 @@
 
 namespace Knp\DictionaryBundle\Command;
 
-use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * Dump dictionaries with their related values
+ * Dump dictionaries with their related values.
  */
 class DictionaryDumpCommand extends Command
 {
     protected static $defaultName = 'knp:dictionary:dump';
 
     /**
-     * @var DictionaryRegistry $registry
+     * @var DictionaryRegistry
      */
     private $registry;
 
@@ -82,9 +81,10 @@ EOF
     }
 
     /**
-     * Get all dictionaries with they values
+     * Get all dictionaries with they values.
      *
      * @param array $dictionaries
+     *
      * @return array rows to display
      */
     private function getDictionariesDetail(array $dictionaries = [])

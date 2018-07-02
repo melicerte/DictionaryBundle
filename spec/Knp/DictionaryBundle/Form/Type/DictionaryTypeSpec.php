@@ -11,17 +11,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DictionaryTypeSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $registry)
+    public function let(DictionaryRegistry $registry)
     {
         $this->beConstructedWith($registry);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Form\Type\DictionaryType');
     }
 
-    function it_is_a_choice_form_type()
+    public function it_is_a_choice_form_type()
     {
         $this
             ->getParent()
@@ -29,7 +29,7 @@ class DictionaryTypeSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_default_options(
+    public function it_has_default_options(
         $registry,
         OptionsResolver $resolver,
         Options $options,
@@ -52,7 +52,7 @@ class DictionaryTypeSpec extends ObjectBehavior
             ->setDefault('choices', Argument::that(function ($callable) use ($options) {
                 $options->offsetGet('name')->willReturn('d1');
 
-                return $callable($options->getWrappedObject()) === array_flip(['foo' => 'bar']);
+                return $callable($options->getWrappedObject()) === \array_flip(['foo' => 'bar']);
             }))
             ->willReturn($resolver)
             ->shouldBeCalled()

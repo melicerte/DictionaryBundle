@@ -26,18 +26,18 @@ class ValueAsKey implements Factory
      */
     public function create($name, array $config)
     {
-        if ( ! isset($config['content'])) {
-            throw new \InvalidArgumentException(sprintf(
+        if (!isset($config['content'])) {
+            throw new \InvalidArgumentException(\sprintf(
                 'The key content for dictionary %s must be set',
                 $name
             ));
         }
 
         $content = $config['content'];
-        $values  = [];
+        $values = [];
 
         foreach ($content as $value) {
-            $builtValue          = $this->transformer->transform($value);
+            $builtValue = $this->transformer->transform($value);
             $values[$builtValue] = $builtValue;
         }
 
@@ -49,6 +49,6 @@ class ValueAsKey implements Factory
      */
     public function supports(array $config)
     {
-        return (isset($config['type'])) ? $config['type'] === 'value_as_key' : false;
+        return (isset($config['type'])) ? 'value_as_key' === $config['type'] : false;
     }
 }

@@ -7,33 +7,33 @@ use Symfony\Component\DependencyInjection\Container;
 
 class CallableFactorySpec extends ObjectBehavior
 {
-    function let(Container $container)
+    public function let(Container $container)
     {
         $this->beConstructedWith($container);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\CallableFactory');
     }
 
-    function it_is_a_factory()
+    public function it_is_a_factory()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory');
     }
 
-    function it_supports_specific_config()
+    public function it_supports_specific_config()
     {
         $this->supports(['type' => 'callable'])->shouldReturn(true);
     }
 
-    function it_creates_a_dictionary(
+    public function it_creates_a_dictionary(
         $container,
         MockedService $service
     ) {
         $config = [
             'service' => 'service.id',
-            'method'  => 'getYolo',
+            'method' => 'getYolo',
         ];
 
         $container->get('service.id')->willReturn($service);

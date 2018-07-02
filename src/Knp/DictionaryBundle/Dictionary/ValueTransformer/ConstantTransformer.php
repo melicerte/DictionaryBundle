@@ -18,18 +18,18 @@ class ConstantTransformer implements ValueTransformer
     {
         $matches = [];
 
-        if (0 === preg_match($this->pattern, $value, $matches)) {
+        if (0 === \preg_match($this->pattern, $value, $matches)) {
             return false;
         }
 
-        if (false === class_exists($matches['class']) && false === interface_exists($matches['class'])) {
+        if (false === \class_exists($matches['class']) && false === \interface_exists($matches['class'])) {
             return false;
         }
 
-        $class     = new \ReflectionClass($matches['class']);
+        $class = new \ReflectionClass($matches['class']);
         $constants = $class->getConstants();
 
-        return array_key_exists($matches['constant'], $constants);
+        return \array_key_exists($matches['constant'], $constants);
     }
 
     /**
@@ -38,7 +38,7 @@ class ConstantTransformer implements ValueTransformer
     public function transform($value)
     {
         $matches = [];
-        preg_match($this->pattern, $value, $matches);
+        \preg_match($this->pattern, $value, $matches);
         $class = new \ReflectionClass($matches['class']);
 
         return $class->getConstant($matches['constant']);

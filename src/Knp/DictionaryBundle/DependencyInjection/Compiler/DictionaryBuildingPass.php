@@ -2,7 +2,6 @@
 
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
-use Knp\DictionaryBundle\Dictionary;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -19,7 +18,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
 
         foreach ($configuration['dictionaries'] as $name => $config) {
             $container->setDefinition(
-                sprintf('knp_dictionary.dictionary.%s', $name),
+                \sprintf('knp_dictionary.dictionary.%s', $name),
                 $this->createDefinition($name, $config)
             );
         }

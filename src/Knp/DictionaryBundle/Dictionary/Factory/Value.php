@@ -26,15 +26,15 @@ class Value implements Factory
      */
     public function create($name, array $config)
     {
-        if ( ! isset($config['content'])) {
-            throw new \InvalidArgumentException(sprintf(
+        if (!isset($config['content'])) {
+            throw new \InvalidArgumentException(\sprintf(
                 'The key content for dictionary %s must be set',
                 $name
             ));
         }
 
         $content = $config['content'];
-        $values  = [];
+        $values = [];
 
         foreach ($content as $value) {
             $values[] = $this->transformer->transform($value);
@@ -48,6 +48,6 @@ class Value implements Factory
      */
     public function supports(array $config)
     {
-        return (isset($config['type'])) ? $config['type'] === 'value' : false;
+        return (isset($config['type'])) ? 'value' === $config['type'] : false;
     }
 }

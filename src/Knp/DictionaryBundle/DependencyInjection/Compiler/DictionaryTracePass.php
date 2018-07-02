@@ -19,12 +19,12 @@ class DictionaryTracePass implements CompilerPassInterface
         }
 
         $collector = new Reference('knp_dictionary.data_collector.dictionary_data_collector');
-        $services  = $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY);
+        $services = $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY);
 
         foreach ($services as $id => $tags) {
-            $serviceId = sprintf('%s.%s.traceable', $id, md5($id));
+            $serviceId = \sprintf('%s.%s.traceable', $id, \md5($id));
 
-            $dictionary = new Reference(sprintf('%s.inner', $serviceId));
+            $dictionary = new Reference(\sprintf('%s.inner', $serviceId));
 
             $traceable = new Definition('Knp\DictionaryBundle\Dictionary\TraceableDictionary', [$dictionary, $collector]);
             $traceable->setDecoratedService($id);

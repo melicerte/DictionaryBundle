@@ -17,7 +17,7 @@ class KnpDictionaryExtension extends Extension
     public function load(array $config, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $config);
+        $config = $this->processConfiguration($configuration, $config);
         $container->setParameter('knp_dictionary.configuration', $config);
 
         $loader = new XmlFileLoader(
@@ -27,7 +27,7 @@ class KnpDictionaryExtension extends Extension
         $loader->load('dictionary.xml');
 
         // BC Layer for Symfony < 3.3
-        if (method_exists($container, 'registerForAutoconfiguration')) {
+        if (\method_exists($container, 'registerForAutoconfiguration')) {
             $container
                 ->registerForAutoconfiguration(Dictionary::class)
                 ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY)

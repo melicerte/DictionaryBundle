@@ -20,7 +20,7 @@ class TraceableDictionary implements Dictionary
     public function __construct(Dictionary $dictionary, DictionaryDataCollector $collector)
     {
         $this->dictionary = $dictionary;
-        $this->collector  = $collector;
+        $this->collector = $collector;
     }
 
     /**
@@ -111,7 +111,7 @@ class TraceableDictionary implements Dictionary
         $this->collector->addDictionary(
             $this->dictionary->getName(),
             $this->dictionary->getKeys(),
-            array_values($this->dictionary->getValues())
+            \array_values($this->dictionary->getValues())
         );
     }
 }
