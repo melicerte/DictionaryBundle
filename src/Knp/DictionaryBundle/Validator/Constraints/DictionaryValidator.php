@@ -31,14 +31,23 @@ class DictionaryValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Dictionary');
         }
 
-        if (null === $value || '' === $value) {
+        if (empty($value)) {
             return;
         }
 
         $dictionary = $this->registry->get($constraint->name);
         $values = $dictionary->getKeys();
 
-        if (false === \in_array($value, $values)) {
+        if ($constraint->multiple && \is_array($value)) {
+            $wrongValues = \array_diff($value, \array_intersect($values, $value));
+
+            if (!empty($wrongValues)) {
+                $this->context->addViolation(
+                    $constraint->message,
+                    ['{{ key }}' => \implode(', ', $wrongValues), '{{ keys }}' => \implode(', ', $values)]
+                );
+            }
+        } else if (false === \in_array($value, $values)) {
             $this->context->addViolation(
                 $constraint->message,
                 ['{{ key }}' => $value, '{{ keys }}' => \implode(', ', $values)]

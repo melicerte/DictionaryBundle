@@ -16,9 +16,14 @@ class Dictionary extends Constraint
     public $name;
 
     /**
+     * @var boolean
+     */
+    public $multiple = false;
+
+    /**
      * @var string
      */
-    public $message = 'The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.';
+    public $message = 'The key(s) {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.';
 
     /**
      * {@inheritdoc}
