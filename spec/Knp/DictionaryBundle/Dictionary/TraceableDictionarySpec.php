@@ -54,20 +54,6 @@ class TraceableDictionarySpec extends ObjectBehavior
         $this['foo']->shouldReturn('bar');
     }
 
-    public function it_traces_value_set($collector)
-    {
-        $collector->addDictionary('name', ['foo', 'baz', 'yo'], ['bar', null, 'lo'])->shouldbeCalled();
-
-        $this['yo'] = 'lo';
-    }
-
-    public function it_traces_value_unset($collector)
-    {
-        $collector->addDictionary('name', ['baz'], [null])->shouldbeCalled();
-
-        unset($this['foo']);
-    }
-
     public function it_traces_key_exists($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();

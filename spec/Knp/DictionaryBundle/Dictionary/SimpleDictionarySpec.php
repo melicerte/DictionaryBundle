@@ -2,6 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
+use Knp\DictionaryBundle\Exception\UnauthorizedActionOnDictionaryException;
 use PhpSpec\ObjectBehavior;
 
 class SimpleDictionarySpec extends ObjectBehavior
@@ -44,5 +45,11 @@ class SimpleDictionarySpec extends ObjectBehavior
         expect($this['foo']->getWrappedObject())->toBe(0);
         expect($this['bar']->getWrappedObject())->toBe(1);
         expect($this['baz']->getWrappedObject())->toBe(2);
+    }
+
+    public function it_throws_exception_on_set_or_delete_item_user_action()
+    {
+        $this->shouldThrow(UnauthorizedActionOnDictionaryException::class)->duringOffsetSet('foo', 'bar');
+        $this->shouldThrow(UnauthorizedActionOnDictionaryException::class)->duringOffsetUnset('baz');
     }
 }
