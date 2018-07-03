@@ -2,6 +2,8 @@
 
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
+use Grpc\Call;
+use Knp\DictionaryBundle\Dictionary\CallableCategorizedDictionary;
 use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Symfony\Component\DependencyInjection\Container;
@@ -46,6 +48,10 @@ class CallableFactory implements Factory
                 'You must provide a valid callable for the dictionary named "%s"',
                 $name
             ));
+        }
+
+        if (isset($config['category'])) {
+            return new CallableCategorizedDictionary($name, $callable, $config['category']);
         }
 
         return new CallableDictionary($name, $callable);

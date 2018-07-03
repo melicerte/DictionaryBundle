@@ -16,7 +16,7 @@ class Dictionary extends Constraint
     public $name;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $multiple = false;
 

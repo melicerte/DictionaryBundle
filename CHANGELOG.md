@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Add new method `getOriginalDictionary` on TraceableDictionary
+- New feature: if you use the `CategoryDictionaryInterface` you'll be able to sort dictionaries by using
+  the registry.
+- The `RegistryDictionary` has now a new filter method.
 
 ### Changed
 - Upgrade `php-cs-fixer` package from `^1.11` to `^2.11` && update `.php_cs` rules
