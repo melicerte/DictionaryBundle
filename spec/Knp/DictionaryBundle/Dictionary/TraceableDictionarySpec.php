@@ -3,6 +3,7 @@
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use PhpSpec\ObjectBehavior;
 
@@ -66,5 +67,10 @@ class TraceableDictionarySpec extends ObjectBehavior
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
         expect(\iterator_to_array($this->getIterator()->getWrappedObject()))->toBe(['foo' => 'bar', 'baz' => null]);
+    }
+
+    public function it_gives_back_dictionary()
+    {
+        $this->getOriginalDictionary()->shouldBeAnInstanceOf(Dictionary::class);
     }
 }
