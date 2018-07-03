@@ -4,6 +4,8 @@ namespace Knp\DictionaryBundle\Command;
 
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -71,13 +73,43 @@ EOF
         $tableRows = $this->getDictionariesDetail($dictionaries);
 
         // Output data
-        if (\sizeof($tableRows) > 0) {
-            foreach ($tableRows as $header => $raws) {
-                $io->table([$header], $raws);
+        if (\count($tableRows) > 0) {
+            foreach ($tableRows as $header => $rows) {
+
+                // If too big dictionary and many dictionaries are to list, then we cut the result
+                if (\count($rows) > 15 && \is_null($dictionaryName)) {
+                    $lessRows = array_slice($rows, 0, 14);
+                    $this->table($output, $header, $lessRows);
+
+                    // Support grep anyway by printing keys
+                    $output->writeln('The table was cut, all these keys are available:');
+                    $output->writeln(implode(', ', array_map(function ($row) {
+                        return $row[0];
+                    }, $rows)));
+                } else {
+                    $this->table($output, $header, $rows);
+                }
+
+                $output->writeln('');
             }
-        } elseif (!\is_null($dictionaryName) && 0 === \sizeof($tableRows)) {
+        } elseif (!\is_null($dictionaryName) && 0 === \count($tableRows)) {
             $errorIo->error("No dictionary named $dictionaryName");
         }
+    }
+
+    private function table(OutputInterface $output, $header, $rows)
+    {
+        $table = new Table($output);
+        $table->setHeaders([$header])->setRows($rows);
+
+        try {
+            // box style only available in 4.1 version of Symfony
+            $table->setStyle('box');
+        } catch (InvalidArgumentException $e) {
+            // Do nothing. It's ok if nice style is not available :)
+        }
+
+        $table->render();
     }
 
     /**
