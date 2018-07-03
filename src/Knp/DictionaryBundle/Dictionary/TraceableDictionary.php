@@ -104,6 +104,14 @@ class TraceableDictionary implements Dictionary
     }
 
     /**
+     * @return Dictionary
+     */
+    public function getOriginalDictionary(): Dictionary
+    {
+        return $this->dictionary;
+    }
+
+    /**
      * Register this dictioanry as used.
      */
     private function trace()

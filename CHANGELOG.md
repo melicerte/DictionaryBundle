@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Add new method `getOriginalDictionary` on TraceableDictionary
+
 ### Changed
 - Upgrade `php-cs-fixer` package from `^1.11` to `^2.11` && update `.php_cs` rules
 - PHP 7.1 is now the minimum version requirement
