@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - PHP 7.1 is now the minimum version requirement
 - Add composer package in Dockerfile
 - Add support for arguments for the callable dictionary
+- Makes command output more readable than before:
+  - Nicer tables
+  - Avoid too long tables by showing only 15 keys
+
 
 ### Fixed
 - Dictionary validator now accept arrays if you specify "multiple" option at `true`
