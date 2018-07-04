@@ -3,10 +3,11 @@
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use Knp\DictionaryBundle\Dictionary\Factory;
+use Knp\DictionaryBundle\Dictionary\SimpleCategorizedDictionary;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer;
 
-class Value implements Factory
+class Value extends AbstractSimpleFactory
 {
     /**
      * @var ValueTransformer
@@ -40,7 +41,7 @@ class Value implements Factory
             $values[] = $this->transformer->transform($value);
         }
 
-        return new SimpleDictionary($name, $values);
+        return $this->newInstance($name, $values, $config['category'] ?? null);
     }
 
     /**

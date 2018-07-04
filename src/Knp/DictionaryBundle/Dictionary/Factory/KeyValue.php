@@ -6,7 +6,7 @@ use Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer;
 
-class KeyValue implements Factory
+class KeyValue extends AbstractSimpleFactory
 {
     /**
      * @var ValueTransformer
@@ -42,7 +42,7 @@ class KeyValue implements Factory
             $values[$key] = $builtValue;
         }
 
-        return new SimpleDictionary($name, $values);
+        return $this->newInstance($name, $values, $config['category'] ?? null);
     }
 
     /**

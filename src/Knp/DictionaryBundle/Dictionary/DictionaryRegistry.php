@@ -24,6 +24,13 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
         return $this;
     }
 
+    public function addDictionaries(array $dictionaries)
+    {
+        foreach ($dictionaries as $dictionary) {
+            $this->set($dictionary->getName(), $dictionary);
+        }
+    }
+
     /**
      * @param string     $key
      * @param Dictionary $dictionary
@@ -68,6 +75,36 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     public function offsetExists($offset)
     {
         return isset($this->dictionaries[$offset]);
+    }
+
+    /**
+     * @param callable $filter ($value, $key): boolean
+     *
+     * @return DictionaryRegistry
+     */
+    public function filter(callable $filter): DictionaryRegistry
+    {
+        $dictionaries = \array_filter($this->dictionaries, $filter, ARRAY_FILTER_USE_BOTH);
+
+        return $this->getNewRegistry($dictionaries);
+    }
+
+    /**
+     * @param string $category
+     *
+     * @return DictionaryRegistry
+     */
+    public function filterByCategory(string $category)
+    {
+        $dictionaries = \array_filter($this->dictionaries, function (Dictionary $dictionary) use ($category) {
+            if ($dictionary instanceof CategoryDictionaryInterface) {
+                return $dictionary->getCategory() === $category;
+            }
+
+            return false;
+        });
+
+        return $this->getNewRegistry($dictionaries);
     }
 
     /**
@@ -123,5 +160,13 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     public function getIterator()
     {
         return new \ArrayIterator($this->dictionaries);
+    }
+
+    private function getNewRegistry(array $dictionaries): DictionaryRegistry
+    {
+        $registry = new DictionaryRegistry();
+        $registry->addDictionaries($dictionaries);
+
+        return $registry;
     }
 }

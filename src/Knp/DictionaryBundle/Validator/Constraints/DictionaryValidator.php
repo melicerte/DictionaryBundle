@@ -47,7 +47,7 @@ class DictionaryValidator extends ConstraintValidator
                     ['{{ key }}' => \implode(', ', $wrongValues), '{{ keys }}' => \implode(', ', $values)]
                 );
             }
-        } else if (false === \in_array($value, $values)) {
+        } elseif (false === \in_array($value, $values)) {
             $this->context->addViolation(
                 $constraint->message,
                 ['{{ key }}' => $value, '{{ keys }}' => \implode(', ', $values)]

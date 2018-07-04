@@ -123,6 +123,30 @@ knp_dictionary:
 Callable dictionaries are loaded with a lazy strategy. It means that the callable
 will not be called if you do not use the dictionary.
 
+### Categories in dictionaries
+
+If you want to retrieve some groups of dictionaries from the registry, then you can specify a
+category to your dictionary.
+
+```yaml
+knp_dictionary:
+    dictionaries:
+        my_dictionary:                  # your dictionary name
+            type: 'key_value'           # your dictionary type
+            category: 'product.toy'     # your dictionary category
+            content:                    # your dictionary content
+                foo: foo_value
+                bar: bar_value
+                baz: baz_value
+```
+
+Get a registry for this category later:
+
+```php
+// Retrieve all dictionaries of a special category
+$dictionaries = $registry->filterByCategory('product.toy')->all();
+```
+
 ## Transformers
 For now, this bundle is only able to resolve your **class constants**:
 
