@@ -2,7 +2,6 @@
 
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
-use Grpc\Call;
 use Knp\DictionaryBundle\Dictionary\CallableCategorizedDictionary;
 use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
