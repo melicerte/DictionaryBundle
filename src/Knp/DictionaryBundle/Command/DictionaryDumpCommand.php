@@ -124,7 +124,15 @@ EOF
         $tableRows = [];
         foreach ($dictionaries as $dico) {
             foreach ($dico as $key => $value) {
-                $tableRows["<fg=cyan>{$dico->getName()}</fg=cyan>"][] = [$key, $value];
+                $dictionaryName = "<fg=cyan>{$dico->getName()}</fg=cyan>";
+                if (\is_array($value)) {
+                    $tableRows[$dictionaryName][] = ["Category : {$key}"];
+                    foreach ($value as $catKey => $catKey) {
+                        $tableRows[$dictionaryName][] = [$catKey, $catKey];
+                    }
+                } else {
+                    $tableRows[$dictionaryName][] = [$key, $value];
+                }
             }
         }
 
