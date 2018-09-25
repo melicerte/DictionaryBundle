@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.3] - 2018-09-25
+#### Fixed
+- Dump dictionary command compatibility with Symfony 3.3
+
 ## [2.1.2] - 2018-02-16
 ### Fixed
 - `knp_dictionary.registry` service declaration set public to true (Symfony 4 fix)
