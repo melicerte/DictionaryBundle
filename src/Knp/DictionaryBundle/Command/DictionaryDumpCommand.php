@@ -31,6 +31,7 @@ class DictionaryDumpCommand extends Command
     protected function configure()
     {
         $this
+            ->setName(self::$defaultName)
             ->setDescription('Dump Dictionaries')
             ->setHelp('This command allows you to dump KNP dictionnaries and their values')
             ->addArgument(
