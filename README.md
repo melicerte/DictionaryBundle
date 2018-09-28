@@ -38,7 +38,8 @@ $bundles = array(
 
 You can ping us if you need some reviews/comments/help:
 
- - [@Nek-](https://github.com/Nek-)
+- [@athos7933](https://github.com/athos7933)
+- [@Nek-](https://github.com/Nek-)
 
 ## Basic usage
 Define dictionaries in your config.yaml file:
