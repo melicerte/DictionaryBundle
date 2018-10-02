@@ -146,6 +146,30 @@ Get a registry for this category later:
 $dictionaries = $registry->filterByCategory('product.toy')->all();
 ```
 
+### Extended dictionary
+
+You can create an extended dictionary:
+```yaml
+knp_dictionary:
+    dictionaries:
+        europe:
+            type: 'key_value'
+            content:
+                fr: France
+                de: Germany
+
+        world:
+            type: 'key_value'
+            extends: europe
+            content:
+                us: USA
+                ca: Canada
+```
+The dictionary `world` will now contains its own values in addition
+to the `europe` values.
+
+*Note*: You must define the initial dictionary *BEFORE* the extended one.
+
 ## Transformers
 For now, this bundle is only able to resolve your **class constants**:
 
