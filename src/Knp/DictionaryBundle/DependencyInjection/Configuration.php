@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -42,6 +44,10 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->children()
                             ->scalarNode('type')->defaultValue('value')->end()
+                            ->scalarNode('extends')->end()
+                            ->arrayNode('dictionaries')
+                                ->normalizeKeys(false)->prototype('scalar')->end()
+                            ->end()
                             ->scalarNode('category')->defaultNull()->end()
                             ->arrayNode('content')
                                 ->prototype('scalar')->end()
