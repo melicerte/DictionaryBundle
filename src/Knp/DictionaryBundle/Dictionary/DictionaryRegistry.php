@@ -90,15 +90,15 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @param string $category
+     * @param string $tag
      *
      * @return DictionaryRegistry
      */
-    public function filterByCategory(string $category)
+    public function filterByTag(string $tag)
     {
-        $dictionaries = \array_filter($this->dictionaries, function (Dictionary $dictionary) use ($category) {
-            if ($dictionary instanceof CategoryDictionaryInterface) {
-                return $dictionary->getCategory() === $category;
+        $dictionaries = \array_filter($this->dictionaries, function (Dictionary $dictionary) use ($tag) {
+            if ($dictionary instanceof TaggedDictionaryInterface) {
+                return \in_array($tag, $dictionary->getTags());
             }
 
             return false;

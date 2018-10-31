@@ -2,7 +2,7 @@
 
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
-use Knp\DictionaryBundle\Dictionary\CallableCategorizedDictionary;
+use Knp\DictionaryBundle\Dictionary\CallableTaggedDictionary;
 use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Symfony\Component\DependencyInjection\Container;
@@ -49,8 +49,8 @@ class CallableFactory implements Factory
             ));
         }
 
-        if (isset($config['category'])) {
-            return new CallableCategorizedDictionary($name, $callable, $config['category']);
+        if (isset($config['tags'])) {
+            return new CallableTaggedDictionary($name, $callable, $config['tags']);
         }
 
         return new CallableDictionary($name, $callable);

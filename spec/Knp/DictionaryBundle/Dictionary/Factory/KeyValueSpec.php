@@ -2,7 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
-use Knp\DictionaryBundle\Dictionary\SimpleCategorizedDictionary;
+use Knp\DictionaryBundle\Dictionary\SimpleTaggedDictionary;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer;
 use PhpSpec\ObjectBehavior;
 
@@ -66,7 +66,7 @@ class KeyValueSpec extends ObjectBehavior
     public function it_creates_a_categorized_dictionary($transformer)
     {
         $config = [
-            'category' => 'some',
+            'tags' => ['some'],
             'content' => [
                 'foo1' => 'bar1',
                 'foo2' => 'bar2',
@@ -83,6 +83,6 @@ class KeyValueSpec extends ObjectBehavior
 
         $dictionary = $this->create('hello', $config);
 
-        $dictionary->shouldBeAnInstanceOf(SimpleCategorizedDictionary::class);
+        $dictionary->shouldBeAnInstanceOf(SimpleTaggedDictionary::class);
     }
 }

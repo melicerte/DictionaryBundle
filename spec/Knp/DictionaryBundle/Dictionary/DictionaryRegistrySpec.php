@@ -3,9 +3,9 @@
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\CategoryDictionaryInterface;
+use Knp\DictionaryBundle\Dictionary\TaggedDictionaryInterface;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
-use Knp\DictionaryBundle\Dictionary\SimpleCategorizedDictionary;
+use Knp\DictionaryBundle\Dictionary\SimpleTaggedDictionary;
 use PhpSpec\ObjectBehavior;
 
 class DictionaryRegistrySpec extends ObjectBehavior
@@ -89,7 +89,7 @@ class DictionaryRegistrySpec extends ObjectBehavior
         ]);
     }
 
-    public function it_filter_dictionaries(SimpleCategorizedDictionary $dictionary3, SimpleCategorizedDictionary $dictionary4)
+    public function it_filter_dictionaries(SimpleTaggedDictionary $dictionary3, SimpleTaggedDictionary $dictionary4)
     {
         $dictionary3->getName()->willReturn('hello');
         $dictionary4->getName()->willReturn('world');
@@ -97,27 +97,27 @@ class DictionaryRegistrySpec extends ObjectBehavior
         $this->set('world', $dictionary4);
 
         $this->filter(function (Dictionary $dictionary, $name) {
-            return $dictionary instanceof CategoryDictionaryInterface;
+            return $dictionary instanceof TaggedDictionaryInterface;
         })->shouldHaveCount(2);
     }
 
-    public function it_filter_by_category(SimpleCategorizedDictionary $dictionary3, SimpleCategorizedDictionary $dictionary4, SimpleCategorizedDictionary $dictionary5)
+    public function it_filter_by_category(SimpleTaggedDictionary $dictionary3, SimpleTaggedDictionary $dictionary4, SimpleTaggedDictionary $dictionary5)
     {
         $dictionary3->getName()->willReturn('hello');
-        $dictionary3->getCategory()->willReturn('main');
+        $dictionary3->getTags()->willReturn(['main']);
 
         $dictionary4->getName()->willReturn('world');
-        $dictionary4->getCategory()->willReturn('main');
+        $dictionary4->getTags()->willReturn(['main']);
 
         $dictionary5->getName()->willReturn('PHP');
-        $dictionary5->getCategory()->willReturn('external_world');
+        $dictionary5->getTags()->willReturn(['external_world']);
 
         $this->set('hello', $dictionary3);
         $this->set('world', $dictionary4);
         $this->set('PHP', $dictionary5);
 
-        $this->filterByCategory('main')->shouldHaveCount(2);
-        $this->filterByCategory('external_world')->shouldHaveCount(1);
-        $this->filterByCategory('external_world')->shouldBeAnInstanceOf(DictionaryRegistry::class);
+        $this->filterByTag('main')->shouldHaveCount(2);
+        $this->filterByTag('external_world')->shouldHaveCount(1);
+        $this->filterByTag('external_world')->shouldBeAnInstanceOf(DictionaryRegistry::class);
     }
 }

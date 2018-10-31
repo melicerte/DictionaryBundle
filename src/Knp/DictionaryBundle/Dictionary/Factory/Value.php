@@ -3,7 +3,7 @@
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use Knp\DictionaryBundle\Dictionary\Factory;
-use Knp\DictionaryBundle\Dictionary\SimpleCategorizedDictionary;
+use Knp\DictionaryBundle\Dictionary\SimpleTaggedDictionary;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer;
 
@@ -41,7 +41,7 @@ class Value extends AbstractSimpleFactory
             $values[] = $this->transformer->transform($value);
         }
 
-        return $this->newInstance($name, $values, $config['category'] ?? null);
+        return $this->newInstance($name, $values, $config['tags'] ?? null);
     }
 
     /**

@@ -41,7 +41,7 @@ class ValueAsKey extends AbstractSimpleFactory
             $values[$builtValue] = $builtValue;
         }
 
-        return $this->newInstance($name, $values, $config['category'] ?? null);
+        return $this->newInstance($name, $values, $config['tags'] ?? null);
     }
 
     /**
