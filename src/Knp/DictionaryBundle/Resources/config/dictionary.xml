@@ -28,6 +28,7 @@
     </service>
 
     <service id="knp_dictionary.dictionary.dictionary_registry" class="Knp\DictionaryBundle\Dictionary\DictionaryRegistry"/>
+    <service id="Knp\DictionaryBundle\Dictionary\DictionaryRegistry" alias="knp_dictionary.dictionary.dictionary_registry" />
 
     <service id="knp_dictionary.dictionary.value_transformer.constant_transformer" class="Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer"/>
 

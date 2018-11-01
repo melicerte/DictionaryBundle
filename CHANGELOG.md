@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ## Added
 - Support for many tags (filter dictionaries)
+- The registry can now be autowired
 
 ## Changed
 - Category is now called tag #34
