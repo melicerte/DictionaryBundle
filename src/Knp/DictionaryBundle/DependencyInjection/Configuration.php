@@ -12,9 +12,16 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-        $builder
-            ->root('knp_dictionary')
+        $builder = new TreeBuilder('knp_dictionary');
+
+        if (method_exists($builder, 'getRootNode')) {
+            $rootNode = $builder->getRootNode();
+        } else {
+            // BC for symfony/config < 4.2
+            $rootNode = $builder->root('knp_dictionary');
+        }
+
+        $rootNode
             ->children()
             ->arrayNode('dictionaries')
                 ->useAttributeAsKey('name')
