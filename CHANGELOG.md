@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.4] - 2019-03-29
+### Changed
+- Fix deprecation trigger of Sf 4.2
+
 ## [2.1.3] - 2018-09-25
-#### Fixed
+### Fixed
 - Dump dictionary command compatibility with Symfony 3.3
 
 ## [2.1.2] - 2018-02-16
