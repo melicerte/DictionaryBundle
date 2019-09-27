@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.5] - 2019-09-27
+### Changed
+- Allow to use the validator inside another annotation
+
 ## [2.1.4] - 2019-03-29
 ### Changed
 - Fix deprecation trigger of Sf 4.2
