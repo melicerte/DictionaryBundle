@@ -22,6 +22,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   the registry.
 - The `RegistryDictionary` has now a new filter method.
 
+## [2.1.5] - 2019-09-27
+### Changed
+- Allow to use the validator inside another annotation
+
+## [2.1.4] - 2019-03-29
 ### Changed
 - Upgrade `php-cs-fixer` package from `^1.11` to `^2.11` && update `.php_cs` rules
 - PHP 7.1 is now the minimum version requirement
