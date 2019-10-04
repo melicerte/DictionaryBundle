@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Fixed
 - Dump command works with category dictionaries
+- DictionaryValidator now add violation to context for dictionaries containing (int) 0 value. It wasn't the case before
 
 ## [3.0.0-alpha1] - 2018-07-06
 ### Added
