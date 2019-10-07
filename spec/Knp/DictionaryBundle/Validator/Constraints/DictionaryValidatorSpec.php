@@ -46,6 +46,20 @@ class DictionaryValidatorSpec extends ObjectBehavior
         $this->validate('the_unexisting_key', $constraint);
     }
 
+    public function it_adds_violation_string_value_with_dictionary_containing_0(DictionaryRegistry $registry, ExecutionContextInterface $context, Dictionary $dictionary)
+    {
+        $this->initialize($context);
+
+        $registry->get('dico')->willReturn($dictionary);
+
+        $dictionary->getKeys()->willReturn([0, 1]);
+        $constraint = new Constraint(['name' => 'dico']);
+
+        $context->addViolation('The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', ['{{ key }}' => 'a not existing key', '{{ keys }}' => '0, 1'])->shouldBeCalled();
+
+        $this->validate('a not existing key', $constraint);
+    }
+
     function it_throw_exception_form_unknown_constraints()
     {
         $constraint = new NotNull();
