@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.6] - 2019-10-07
+### Fixed
+- Fix bad validation for dictionaries having key 0 (confusion with strings possible)
+
 ## [2.1.5] - 2019-09-27
 ### Changed
 - Allow to use the validator inside another annotation
