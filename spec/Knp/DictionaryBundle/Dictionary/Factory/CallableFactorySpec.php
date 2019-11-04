@@ -52,11 +52,44 @@ class CallableFactorySpec extends ObjectBehavior
             'foo3' => 'bar3',
         ]);
     }
+
+    public function it_creates_an_invokable_dictionary(
+        $container,
+        MockedService $service
+    ) {
+        $config = [
+            'service' => 'service.id'
+        ];
+
+        $service = new CallableService();
+        $container->get('service.id')->willReturn($service);
+        
+        $dictionary = $this->create('yolo', $config);
+
+        $dictionary->getName()->shouldBe('yolo');
+        $dictionary->getValues()->shouldBe([
+            'foo1' => 'bar1',
+            'foo2' => 'bar2',
+            'foo3' => 'bar3',
+        ]);
+    }
 }
 
 class MockedService
 {
     public function getYolo()
     {
+    }
+}
+
+class CallableService
+{
+    public function __invoke()
+    {
+        return [
+            'foo1' => 'bar1',
+            'foo2' => 'bar2',
+            'foo3' => 'bar3',
+        ];
     }
 }

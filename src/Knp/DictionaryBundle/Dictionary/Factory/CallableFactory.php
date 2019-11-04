@@ -36,10 +36,10 @@ class CallableFactory implements Factory
 
         $service = $this->container->get($config['service']);
 
-        $callable = [$service];
+        $callable = $service;
 
         if (isset($config['method'])) {
-            $callable[] = $config['method'];
+            $callable = [$service, $config['method']];
         }
 
         if (!\is_callable($callable)) {
